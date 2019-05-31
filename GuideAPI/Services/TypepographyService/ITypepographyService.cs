@@ -10,8 +10,8 @@ namespace GuideAPI.Services.TypepographyService
     {
         Task<bool> AddAsync(int idStyleSheet, Typepography model);
         Task<IEnumerable<Typepography>> GetAllTypepographyAsync(int id);
-        Task<Typepography> GetTypepographyAsync(int idStyleSheet, int idTypepography);
-        Task<bool> DeleteTypepographyAsync(int ididStyleSheet, int idTypepography);
+        Task<Typepography> GetTypepographyAsync(int idTypepography);
+        Task<bool> DeleteTypepographyAsync(int idTypepography);
         Task<bool> UpdateTypepography(int idStyleSheet, Typepography model);
     }
 }

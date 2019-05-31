@@ -44,12 +44,12 @@ namespace GuideAPI.Services.ColorPaletteService
 
         }
 
-        public async Task<bool> DeleteColorPaletteAsync(int idStyleSheet, int idColorPalette)
+        public async Task<bool> DeleteColorPaletteAsync(int idColorPalette)
         {
             try
             {
                 var colorRemove = await _dbContext.ColorPalette
-                                .Where(e => e.Id == idColorPalette && e.StyleSheetId == idStyleSheet).SingleOrDefaultAsync();
+                                .Where(e => e.Id == idColorPalette).SingleOrDefaultAsync();
 
                 if (colorRemove == null)
                     return false;
@@ -59,7 +59,7 @@ namespace GuideAPI.Services.ColorPaletteService
                 var saved = await _dbContext.SaveChangesAsync();
                 return saved == 1;
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
             }
@@ -84,13 +84,13 @@ namespace GuideAPI.Services.ColorPaletteService
             return listCalors; 
         }
 
-        public async  Task<ColorPalette> GetColorPaletteAsync(int idStyleSheet, int idColorPalette)
+        public async  Task<ColorPalette> GetColorPaletteAsync(int idColorPalette)
         {
             var colorPalette = new ColorPalette();
             try
             {
                 colorPalette = await _dbContext.ColorPalette
-                                .Where(e => e.Id == idColorPalette && e.StyleSheetId == idStyleSheet).SingleOrDefaultAsync();
+                                .Where(e => e.Id == idColorPalette).SingleOrDefaultAsync();
 
                 if (colorPalette == null)
                     return null;

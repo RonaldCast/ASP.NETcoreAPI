@@ -20,9 +20,9 @@ namespace GuideAPI.Controllers
             _colorPaletteService = colorPaletteService;
         }
 
-        // GET styleSheet/5/Colorpalette
-        [HttpGet("styleSheet/{id}/Colorpalette")]
-        public async Task<ActionResult> Get(int id)
+        //GET styleSheet/5/Colorpalette
+       [HttpGet("styleSheet/{id}/Colorpalette")]
+        public async Task<ActionResult> GetAllColorPalette(int id)
         {
             return Ok(
                 await _colorPaletteService.GetAllColorPaletteAsync(id)
@@ -30,10 +30,10 @@ namespace GuideAPI.Controllers
         }
 
         // GET styleSheet/5/Colorpalette/1
-        [HttpGet("styleSheet/{id}/ColorPalette/{idColor}")]
-        public async Task<ActionResult<ColorPalette>> Get(int id, int idColor)
+        [HttpGet("ColorPalette/{id}")]
+        public async Task<ActionResult<ColorPalette>> GetOneColor(int id)
         {
-            var model = await _colorPaletteService.GetColorPaletteAsync(id, idColor);
+            var model = await _colorPaletteService.GetColorPaletteAsync(id);
 
             if (model == null)
                return NotFound();
@@ -57,10 +57,10 @@ namespace GuideAPI.Controllers
         }
 
         //DELETE stylesheet/5/Colorpalette/4
-        [HttpDelete("styleSheet/{id}/ColorPalette/{idColor}")]
-        public async Task<ActionResult<bool>> Delete(int id, int idColor)
+        [HttpDelete("ColorPalette/{id}")]
+        public async Task<ActionResult<bool>> Delete(int id)
         {
-            var colorPalette = await _colorPaletteService.DeleteColorPaletteAsync(id, idColor);
+            var colorPalette = await _colorPaletteService.DeleteColorPaletteAsync(id);
 
             if (colorPalette == false)
                 return NotFound();
@@ -69,7 +69,7 @@ namespace GuideAPI.Controllers
         }
 
         // PUT stylesheet/5/Colorpalette/4
-        [HttpPut("styleSheet/{id}/ColorPalette/{idColor}")]
+        [HttpPut("colorPalette/{id}")]
         public async Task<ActionResult<bool>> Put(int id, [FromBody] ColorPalette model)
         {
             var updateColorPalette = await _colorPaletteService.UpdateColorStyleAsync(id, model);

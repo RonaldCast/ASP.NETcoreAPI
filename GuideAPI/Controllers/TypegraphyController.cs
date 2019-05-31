@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GuideAPI.Controllers
 {
-    ///[Route("")]
     [ApiController]
     public class TypepographyController : ControllerBase
     {
@@ -21,7 +20,7 @@ namespace GuideAPI.Controllers
 
         // GET styleSheet/5/Typography
         [HttpGet("styleSheet/{id}/Typepography")]
-        public async Task<ActionResult<IEnumerable<Typepography>>> Get(int id)
+        public async Task<ActionResult<IEnumerable<Typepography>>> GetAllTypography(int id)
         {
             var listTypepography = await _typepographyService.GetAllTypepographyAsync(id);
 
@@ -32,11 +31,11 @@ namespace GuideAPI.Controllers
 
         }
 
-        // GET styleSheet/5/Typography/1
-        [HttpGet("styleSheet/{id}/Typepography/{idTypegraphy}")]
-        public async Task<ActionResult<Typepography>> Get(int id, int idTypegraphy)
+        // GET Typography/1
+        [HttpGet("typepography/{id}")]
+        public async Task<ActionResult<Typepography>> GetOneTypography(int id)
         {
-            var model = await _typepographyService.GetTypepographyAsync(id, idTypegraphy);
+            var model = await _typepographyService.GetTypepographyAsync(id);
 
             if (model == null)
                 return NotFound(new { message = "not found" });
@@ -56,8 +55,8 @@ namespace GuideAPI.Controllers
             return Ok(saved);
         }
 
-        // PUT styleSheet/5/Typography/1
-        [HttpPut("styleSheet/{id}/Typepography/{idTypepography}")]
+        // PUT typography/1
+        [HttpPut("typepography/{id}")]
         public async Task<ActionResult<bool>> Put(int id, [FromBody] Typepography model)
         {
             var saved = await _typepographyService.UpdateTypepography(id, model);
@@ -69,10 +68,10 @@ namespace GuideAPI.Controllers
         }
 
         // DELETE styleSheet/5/Typography/1
-        [HttpDelete("styleSheet/{id}/Typepography/{idTypepography}")]
-        public async Task<ActionResult<bool>> Delete(int id, int idTypepography)
+        [HttpDelete("typepography/{id}")]
+        public async Task<ActionResult<bool>> Delete(int id)
         {
-            var saved = await _typepographyService.DeleteTypepographyAsync(id, idTypepography);
+            var saved = await _typepographyService.DeleteTypepographyAsync(id);
 
             if (saved == false)
                 return BadRequest();
