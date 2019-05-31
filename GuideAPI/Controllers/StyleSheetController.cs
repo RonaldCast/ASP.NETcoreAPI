@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GuideAPI.Models;
+using GuideAPI.Services.ColorPaletteService;
 using GuideAPI.Services.StyleSheetService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +15,13 @@ namespace GuideAPI.Controllers
     public class StyleSheetController : ControllerBase
     {
         public readonly IStyleSheetService _styleSheetService;
+        public readonly IColorPaletteService _colorPaletteService;
 
-        public StyleSheetController(IStyleSheetService styleSheetService)
+        public StyleSheetController(IStyleSheetService styleSheetService, 
+            IColorPaletteService colorPaletterService)
         {
             _styleSheetService = styleSheetService;
+            _colorPaletteService = colorPaletterService;
         }
         // GET /stylesheet
         [HttpGet]
@@ -89,6 +93,5 @@ namespace GuideAPI.Controllers
             return NoContent();
 
         }
-
     }
 }

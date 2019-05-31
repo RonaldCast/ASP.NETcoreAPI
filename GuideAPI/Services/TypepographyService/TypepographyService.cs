@@ -41,13 +41,12 @@ namespace GuideAPI.Services.TypepographyService
             }
         }
 
-        public async Task<bool> DeleteTypepographyAsync
-            (int idStyleSheet, int idTypepography)
+        public async Task<bool> DeleteTypepographyAsync (int idTypepography)
         {
             try
             {
                 var model = await _dbContext.Typepography
-                    .Where(e => e.Id == idTypepography && e.StyleSheetId == idStyleSheet)
+                    .Where(e => e.Id == idTypepography)
                     .SingleOrDefaultAsync();
                 if (model == null)
                     return false;
@@ -85,14 +84,14 @@ namespace GuideAPI.Services.TypepographyService
             return listTypepography; 
         }
 
-        public async Task<Typepography> GetTypepographyAsync(int idStyleSheet, int idTypepography)
+        public async Task<Typepography> GetTypepographyAsync(int idTypepography)
         {
             var typepography = new Typepography();
 
             try
             {
                 typepography = await _dbContext.Typepography
-                             .Where(e => e.StyleSheetId == idStyleSheet && e.Id == idTypepography)
+                             .Where( e => e.Id == idTypepography)
                              .SingleOrDefaultAsync();
             }
             catch
